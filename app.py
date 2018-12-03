@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[8]:
 
 
 import numpy as np
@@ -12,14 +12,14 @@ import plotly.graph_objs as go
 import pandas as pd
 
 app = dash.Dash(__name__)
-server = app.server)
+server = app.server
 
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 
 
 
-# In[2]:
+# In[9]:
 
 
 df = pd.read_csv(
@@ -34,7 +34,7 @@ df= df[df.GEO != 'Euro area (19 countries)']
 df= df[df.GEO != 'Euro area (12 countries)']
 
 
-# In[70]:
+# In[10]:
 
 
 
@@ -101,7 +101,7 @@ def update_graph(xaxis_column_name, yaxis_column_name,
             x=dff[dff['NA_ITEM'] == xaxis_column_name]['Value'],
             y=dff[dff['NA_ITEM'] == yaxis_column_name]['Value'],
             text=dff[dff['NA_ITEM'] == yaxis_column_name]['GEO'],
-            mode='lines',
+            mode='markers',
             marker={
                 'size': 15,
                 'opacity': 0.5,
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
 # ## Exercise 2 practice
 
-# In[76]:
+# In[11]:
 
 
 import numpy as np
@@ -240,72 +240,4 @@ if __name__ == '__main__':
 
 
 
-
-app = dash.Dash()
-df = pd.read_csv(
-    'nama_10_gdp_1_Data.csv')
-
-available_indicators = df['NA_ITEM'].unique()
-
-country_dropdown = df['GEO'].unique()
-country_dropwdown_cleaned = np.delete(country_dropdown,[0,1,2,3,4,5],axis=0)
-
-app.layout = html.Div([
-    html.Div([
-
-        html.Div([
-            dcc.Dropdown(
-                id='xaxis-column',
-                options=[{'label': i, 'value': i} for i in available_indicators],
-                
-            )
-        ],
-        style={'width': '48%', 'display': 'inline-block'}),
-
-        html.Div([
-            dcc.Dropdown(
-                id='yaxis-column',
-                options=[{'label': i, 'value': i} for i in country_dropwdown_cleaned],
-            )],style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-    ]),
-
-    dcc.Graph(id='indicator-graphic')
-])
-
-@app.callback(
-    dash.dependencies.Output('indicator-graphic', 'figure'),
-    [dash.dependencies.Input('xaxis-column', 'value'),
-     dash.dependencies.Input('yaxis-column', 'value')])
-def update_graph(xaxis_column_name, yaxis_column_name,
-                year_value):
-    dff = df[df['TIME'] == year_value]
-    
-    return {
-        'data': [go.Scatter(
-            x=dff[dff['NA_ITEM'] == xaxis_column_name]['Value'],
-            y=dff[dff['NA_ITEM'] == yaxis_column_name]['Value'],
-            text=dff[dff['NA_ITEM'] == yaxis_column_name]['GEO'],
-            mode='lines',
-            marker={
-                'size': 15,
-                'opacity': 0.5,
-                'line': {'width': 0.5, 'color': 'white'}
-            }
-        )],
-        'layout': go.Layout(
-            xaxis={
-                'title': xaxis_column_name,
-                'type': 'linear' if xaxis_type == 'Linear' else 'log'
-            },
-            yaxis={
-                'title': yaxis_column_name,
-                'type': 'linear' if yaxis_type == 'Linear' else 'log'
-            },
-            margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
-            hovermode='closest'
-        )
-    }
-
-if __name__ == '__main__':
-    app.run_server()
 
