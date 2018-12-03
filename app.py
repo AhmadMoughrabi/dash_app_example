@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[8]:
+# In[16]:
 
 
 import numpy as np
@@ -11,16 +11,9 @@ import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
 
+app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 app = dash.Dash(__name__)
 server = app.server
-
-app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
-
-
-
-
-# In[9]:
-
 
 df = pd.read_csv(
     'nama_10_gdp_1_Data.csv')
@@ -32,10 +25,6 @@ df= df[df.GEO != 'European Union (15 countries)']
 df= df[df.GEO != 'Euro area (EA11-2000, EA12-2006, EA13-2007, EA15-2008, EA16-2010, EA17-2013, EA18-2014, EA19)']
 df= df[df.GEO != 'Euro area (19 countries)']
 df= df[df.GEO != 'Euro area (12 countries)']
-
-
-# In[10]:
-
 
 
 available_indicators = df['NA_ITEM'].unique()
@@ -128,7 +117,7 @@ if __name__ == '__main__':
 
 # ## Exercise 2 practice
 
-# In[11]:
+# In[ ]:
 
 
 import numpy as np
@@ -138,7 +127,9 @@ import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
 
-
+app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
+app = dash.Dash(__name__)
+server = app.server
 
 df = pd.read_csv(
     'nama_10_gdp_1_Data.csv')
@@ -150,6 +141,7 @@ df= df[df.GEO != 'European Union (15 countries)']
 df= df[df.GEO != 'Euro area (EA11-2000, EA12-2006, EA13-2007, EA15-2008, EA16-2010, EA17-2013, EA18-2014, EA19)']
 df= df[df.GEO != 'Euro area (19 countries)']
 df= df[df.GEO != 'Euro area (12 countries)']
+
 
 
 
@@ -232,12 +224,4 @@ def update_graph(countries, yaxis_column,yaxis_type,
 
 if __name__ == '__main__':
     app.run_server()
-
-
-# ## EXERCISE 2
-
-# In[ ]:
-
-
-
 
