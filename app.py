@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[ ]:
 
 
 import dash
@@ -10,8 +10,11 @@ import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
 
-app = dash.Dash()
+
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
+app = dash.Dash(__name__)
+server = app.server
+
 df = pd.read_csv('nama_10_gdp_1_Data.csv')
 df_cleaned = df[~df.GEO.str.contains("Euro")]
 
